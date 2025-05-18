@@ -1,0 +1,11 @@
+class Solution {
+  public:
+    int getSingle(vector<int>& arr) {
+        // code here
+        int ans = 0;
+        
+        for(int arrs : arr) ans ^= arrs;
+        
+        return ans;
+    }
+};
