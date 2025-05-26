@@ -1,0 +1,38 @@
+class Solution {
+  public:
+    int minRemoval(vector<vector<int>> &intervals) {
+        // code here
+        sort(begin(intervals), end(intervals));
+        
+        int n = intervals.size();
+        int i = 0;
+        int j = 1;
+        int count = 0;
+        
+        while(j < n){
+            vector<int> curr_interval = intervals[i];
+            vector<int> next_interval = intervals[j];
+            
+            int cs = curr_interval[0]; // current start
+            int ce = curr_interval[1]; // current end
+            
+            int ns = next_interval[0];  // next start
+            int ne = next_interval[1];  // next end
+            
+            if(ce <= ns){  // no overlapping
+                i = j;
+                j++;
+            }
+            else if(ce <= ne){  // overlapping
+                j++;
+                count++;
+            }
+            else if(ce > ne){   // overlapping
+                i = j; 
+                j++;
+                count++;
+            }
+        }
+        return count;
+    }
+};
