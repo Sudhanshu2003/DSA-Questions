@@ -1,0 +1,44 @@
+class Solution {
+  public:
+    int findPivot(vector<int>& arr, int n){
+        int lo = 0;
+        int hi = n-1;
+        
+        while(lo < hi){
+            int mid = lo + (hi - lo) / 2;
+            
+            if(arr[mid] > arr[hi]) lo = mid + 1;
+             
+            else hi = mid;
+        }
+        return hi;
+    }
+    int binarySearch(int lo, int hi, vector<int>& arr, int key){
+        int idx = -1;
+        
+        while(lo <= hi){
+            int mid = lo + (hi - lo) / 2;
+            if(arr[mid] == key){
+                idx = mid;
+                break;
+            }
+            else if(arr[mid] < key) lo = mid+1;
+            else hi = mid-1;
+        }
+        return idx;
+    }
+    int search(vector<int>& arr, int key) {
+        
+        int n = arr.size();
+        
+        int pivot_index = findPivot(arr, n);
+        
+        int idx = binarySearch(0, pivot_index-1, arr, key);
+        
+        if(idx != -1) return idx;
+        
+        idx = binarySearch(pivot_index, n-1, arr, key);
+        
+        return idx;
+    }
+};
