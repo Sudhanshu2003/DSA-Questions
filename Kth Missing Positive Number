@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+        int n = arr.size();
+
+        // LINEAR SEARCH
+        // int arrs = 1;
+        // int i = 0;
+
+        // while(i<n && k>0){
+        //     if(arr[i] == arrs) i++;
+        //     else k--;
+        //     arrs++;
+        // }
+        // while(k--) arrs++;
+
+        // return arrs-1;
+
+        // BINARY SEARCH
+        int lo = 0;
+        int hi = n-1;
+        int mid = -1;
+
+        while(lo <= hi){
+            mid = lo + (hi-lo) / 2;
+            int missing_element = arr[mid] - (mid + 1);
+
+            if(missing_element < k) lo = mid + 1;
+            else hi = mid-1;
+        }
+        return lo + k;
+    }
+};
